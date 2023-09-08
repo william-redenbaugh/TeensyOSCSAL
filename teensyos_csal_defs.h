@@ -13,7 +13,8 @@ typedef struct os_mut_t
 
 typedef struct os_sem_t
 {
-
+    volatile uint32_t count = 0;
+    unsafe_fifo_t thread_queue;
 } os_sem_t;
 
 typedef struct os_setbits_t

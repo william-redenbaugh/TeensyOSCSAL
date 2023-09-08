@@ -1,6 +1,6 @@
 #include "global_includes.h"
 
-#define MAX_THREADS_ACQUIRE_MUTEX 24
+#define MAX_THREADS_ACQUIRE_MUTEX 8
 
 int os_mut_init(os_mut_t *mut)
 {
