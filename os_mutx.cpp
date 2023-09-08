@@ -43,6 +43,8 @@ int os_mut_entry(os_mut_t *mut, uint32_t timeout_ms)
     thread_t *this_thread = _os_current_thread();
     this_thread->mutex_semaphore = &mut->state;
     this_thread->flags = THREAD_BLOCKED_MUTEX_TIMEOUT;
+    this_thread->interval = timeout_ms;
+    this_thread->previous_millis = millis();
 
     // Enqueue this thread into the list of threads waiting on the mutex
     os_thread_id_t thread_id = os_current_id();
@@ -134,6 +136,8 @@ int os_mut_entry_wait_indefinite(os_mut_t *mut)
     // Context switch out of the thread.
     // This thread will only resume once it's aqcuired the mutex
     _os_yield();
+
+    return OS_RET_OK;
 }
 
 int os_mut_exit(os_mut_t *mut)
@@ -157,6 +161,7 @@ int os_mut_exit(os_mut_t *mut)
 
     // We are gonna need to make sure whatever threads are waitin
     // On this mutex can get scheduled to run it.
+    // If the thread in the queue timed out before we released we move on to next thread
     while (true)
     {
         // If there's a thread waiting to be resumed by the
