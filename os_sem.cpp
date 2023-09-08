@@ -1,6 +1,6 @@
 #include "global_includes.h"
 
-#define MAX_THREADS_ACQUIRE_SEMAPHORE 8
+#define MAX_THREADS_ACQUIRE_SEMAPHORE 12
 
 int os_sem_init(os_sem_t *sem, int count)
 {
