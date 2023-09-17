@@ -21,15 +21,20 @@ typedef struct os_sem_t
 typedef struct os_setbits_t
 {
     unsafe_fifo_t thread_queue;
-    
+
     volatile uint32_t bits = 0;
 } os_setbits_t;
 
+typedef void (*os_timer_cb_t)(void *params);
+
 typedef struct os_timer_t
 {
+    os_timer_cb_t timer_cb;
+    void *params;
+    uint32_t interval_ms;
+    uint32_t last_updated;
 
+    int status;
 } os_timer_t;
-
-typedef void (*os_timer_cb_t)(void *params);
 
 #endif
