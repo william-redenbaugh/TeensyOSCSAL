@@ -21,6 +21,7 @@ typedef struct os_sem_t
 typedef struct os_setbits_t
 {
     unsafe_fifo_t thread_queue;
+    
     volatile uint32_t bits = 0;
 } os_setbits_t;
 
