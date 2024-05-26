@@ -4,6 +4,8 @@
 #include "OS/OSMutexKernel.h"
 #include "CSAL_SHARED/unsafe_fifo.h"
 
+#define BIT0 0b0000000000000001
+
 typedef struct os_mut_t
 {
     volatile uint32_t state = MUTEX_UNLOCKED;

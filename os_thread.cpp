@@ -43,6 +43,10 @@ int add_idle_events(idle_handler_func func, void *parameters)
     return OS_RET_OK;
 }
 
+bool os_cmp_id(os_thread_id_t thread_one_id, os_thread_id_t thread_two_id){
+    return thread_one_id == thread_two_id;
+}
+
 /*!
  * @brief Thread that calculates remainder stuff, and sits around
  * @param void *params
